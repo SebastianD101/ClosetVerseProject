@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{% if edit_mode %}Edit Accessory{% else %}Add New Accessory{% endif %}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">{% if edit_mode %}Update{% else %}Add{% endif %} Accessory</button>
+    </form>
+{% endblock %}

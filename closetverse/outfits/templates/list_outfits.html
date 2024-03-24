@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <h2>Fit Check📸</h2>
+    <a href="{% url 'add_outfit' %}" class="btn btn-dark mb-3">Add New Outfit</a>
+    <form method="get" action="">
+        <div class="form-group">
+            <label for="color">Filter by Color:</label>
+            <select id="color" name="color" class="form-control">
+                <option value="">Select Color</option>
+                {% for color in colors %}
+                    <option value="{{ color }}" {% if color == color_query %}selected{% endif %}>{{ color }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+    <div class="row">
+        {% for outfit in outfits %}
+            <div class="col-md-6 mb-4">
+                <div style="padding: 10px; border-radius: 5px; border-style: solid; border-color: #C9E4DE;">
+                    <div class="card-deck" style="margin: 0.5rem;">
+                        <div class="card">
+                            {% if outfit.shirt.picture %}
+                                <img src="{{ outfit.shirt.picture.url }}" class="card-img-top" alt="{{ outfit.shirt.name }}">
+                            {% endif %}
+                            {% if outfit.pants.picture %}
+                                <img src="{{ outfit.pants.picture.url }}" class="card-img-top" alt="{{ outfit.pants.name }}">
+                            {% endif %}
+                            {% if outfit.shoes.picture %}
+                                <img src="{{ outfit.shoes.picture.url }}" class="card-img-top" alt="{{ outfit.shoes.name }}">
+                            {% endif %}
+                        </div>
+                        <div class="card">
+                            {% if outfit.jacket and outfit.jacket.picture %}
+                                <img src="{{ outfit.jacket.picture.url }}" class="card-img-top" alt="{{ outfit.jacket.name }}">
+                            {% endif %}
+                            {% for accessory in outfit.accessories.all %}
+                                {% if accessory.picture %}
+                                    <img src="{{ accessory.picture.url }}" class="card-img-top" alt="{{ accessory.name }}">
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <a href="{% url 'edit_outfit' outfit.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <a href="{% url 'delete_outfit' outfit.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col">
+                <p>No outfits found.</p>
+            </div><br>
+        {% endfor %}
+    </div>
+{% endblock %}

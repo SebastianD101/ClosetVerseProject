@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <h2>Jackets 🧥</h2>
+    <a href="{% url 'add_jacket' %}" class="btn btn-dark mb-3">Add New Jacket</a>
+
+    <form method="get" action="" class="mb-4">
+        <div class="form-group">
+            <label for="color">Filter by Color:</label>
+            <select name="color" id="color" class="form-control">
+                <option value="">All Colors</option>
+                {% for color in colors %}
+                    <option value="{{ color }}" {% if request.GET.color == color %}selected{% endif %}>{{ color }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-secondary">Filter</button>
+    </form>
+
+    <div class="row">
+        {% for jacket in jackets %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if jacket.picture %}
+                        <img src="{{ jacket.picture.url }}" class="card-img-top" alt="{{ jacket.name }}">
+                    {% else %}
+                        <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="Placeholder">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ jacket.name }}</h5>
+                        <p class="card-text">
+                            Brand: {{ jacket.brand }}<br>
+                            Color: {{ jacket.color }}<br>
+                            Size: {{ jacket.size }}<br>
+                        </p>
+                        <a href="{% url 'edit_jacket' jacket.id %}" class="btn btn-sm btn-secondary">Edit</a>
+                        <a href="{% url 'delete_jacket' jacket.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col">
+                <p>No jackets found.</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

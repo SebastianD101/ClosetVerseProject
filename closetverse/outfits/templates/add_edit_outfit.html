@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{% if edit_mode %}Edit Outfit{% else %}Add New Outfit{% endif %}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_shirt">Shirt:</label>
+            {{ form.shirt }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_jacket">Jacket (Optional):</label>
+            {{ form.jacket }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_pants">Pants:</label>
+            {{ form.pants }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_shoes">Shoes:</label>
+            {{ form.shoes }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_accessories">Accessories (Optional):</label>
+            {{ form.accessories }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">{% if edit_mode %}Update{% else %}Add{% endif %} Outfit</button>
+    </form>
+{% endblock %}

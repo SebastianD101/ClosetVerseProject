@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <h2>Pants 👖</h2>
+    <a href="{% url 'add_pants' %}" class="btn btn-dark mb-3">Add New Pants</a>
+
+    <form method="get" action="" class="mb-4">
+        <div class="form-group">
+            <label for="color">Filter by Color:</label>
+            <select name="color" id="color" class="form-control">
+                <option value="">All Colors</option>
+                {% for color in colors %}
+                    <option value="{{ color }}" {% if request.GET.color == color %}selected{% endif %}>{{ color }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-secondary">Filter</button>
+    </form>
+
+    <div class="row">
+        {% for pant in pants %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if pant.picture %}
+                        <img src="{{ pant.picture.url }}" class="card-img-top" alt="{{ pant.name }}">
+                    {% else %}
+                        <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="Placeholder">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ pant.name }}</h5>
+                        <p class="card-text">
+                            Brand: {{ pant.brand }}<br>
+                            Color: {{ pant.color }}<br>
+                            Size: {{ pant.size }}<br>
+                        </p>
+                        <a href="{% url 'edit_pants' pant.id %}" class="btn btn-sm btn-secondary">Edit</a>
+                        <a href="{% url 'delete_pants' pant.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col">
+                <p>No pants found.</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

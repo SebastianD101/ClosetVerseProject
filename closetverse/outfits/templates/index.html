@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="jumbotron" style="background-color: #C9E4DE">
+        <h1 class="display-4">Welcome to ClosetVerse🚪🌌</h1>
+        <p class="lead">Your virtual closet management system.</p>
+        <hr class="my-4">
+        <p>Manage and organize your clothing items efficiently.</p>
+        <a class="btn btn-dark btn-lg" href="/outfits/" role="button">Build Outfits</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Shirts 👕</h2>
+            <p>Manage your shirts collection.</p>
+            <p><a class="btn btn" href="/shirts/" role="button" style="background-color: #FAEDCB">Add shirts &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Pants 👖</h2>
+            <p>Keep your pants organized.</p>
+            <p><a class="btn btn" href="/pants/" role="button" style="background-color: #F7D9C4">Add pants &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Jackets 🧥</h2>
+            <p>Jackets that keep you warm.</p>
+            <p><a class="btn btn" href="/jackets/" role="button" style="background-color: #C6DEF1">Add jackets &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Shoes 👞</h2>
+            <p>Walk a mile in these.</p>
+            <p><a class="btn btn" href="/shoes/" role="button" style="background-color: #D8CDF0">Add shoes &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Accessories 🧢</h2>
+            <p>Accessories to complement your outfits.</p>
+            <p><a class="btn btn" href="/accessories/" role="button" style="background-color: #F2C6DE">Add accessories &raquo;</a></p>
+        </div>
+    </div>
+{% endblock %}

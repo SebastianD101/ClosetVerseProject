@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Delete Shirt</h2>
+    <p>Are you sure you want to delete the shirt?</p>
+    <form method="post">
+        {% csrf_token %}
+        <a href="{% url 'list_shirts' %}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+{% endblock %}
