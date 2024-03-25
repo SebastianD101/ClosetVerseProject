@@ -24,7 +24,7 @@
             <div class="col-md-4 mb-4">
                 <div class="card">
                     {% if accessory.picture %}
-                        <img src="{{ accessory.picture.url }}" class="card-img-top" alt="{{ accessory.name }}">
+                        <img src="{{ MEDIA_URL }}{{ accessory.picture.url }}" class="card-img-top" alt="{{ accessory.name }}">
                     {% else %}
                         <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="Placeholder">
                     {% endif %}
