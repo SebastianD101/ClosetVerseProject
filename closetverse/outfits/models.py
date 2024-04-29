@@ -5,7 +5,7 @@ class Shirt(models.Model):
     name = models.CharField(max_length=100)
     sku = models.CharField(max_length=100, blank=True, null=True)  # optional
     size = models.CharField(max_length=10, blank=True, null=True)  # optional
-    color = models.CharField(max_length=30, blank=True, null=True) # optional
+    color = models.CharField(max_length=30, blank=True, null=True, db_index=True) # optional, index on shirt color
     picture = models.ImageField(upload_to='images/', blank=True, null=True) # optional
 
     def __str__(self):
@@ -16,7 +16,7 @@ class Jacket(models.Model):
     name = models.CharField(max_length=100)
     sku = models.CharField(max_length=100, blank=True, null=True)  # optional
     size = models.CharField(max_length=10, blank=True, null=True)  # optional
-    color = models.CharField(max_length=30, blank=True, null=True) # optional
+    color = models.CharField(max_length=30, blank=True, null=True, db_index=True) # optional, index on jacket color
     picture = models.ImageField(upload_to='images/', blank=True, null=True) # optional
 
     def __str__(self):
@@ -27,7 +27,7 @@ class Pants(models.Model):
     name = models.CharField(max_length=100)
     sku = models.CharField(max_length=100, blank=True, null=True)  # optional
     size = models.CharField(max_length=10, blank=True, null=True)  # optional
-    color = models.CharField(max_length=30, blank=True, null=True) # optional
+    color = models.CharField(max_length=30, blank=True, null=True, db_index=True) # optional, index on pants color
     picture = models.ImageField(upload_to='images/', blank=True, null=True) # optional
 
     def __str__(self):
@@ -38,7 +38,7 @@ class Shoes(models.Model):
     name = models.CharField(max_length=100)
     sku = models.CharField(max_length=100, blank=True, null=True)  # optional
     size = models.CharField(max_length=10, blank=True, null=True)  # optional
-    color = models.CharField(max_length=30, blank=True, null=True) # optional
+    color = models.CharField(max_length=30, blank=True, null=True, db_index=True) # optional, index on shoes color
     picture = models.ImageField(upload_to='images/', blank=True, null=True) # optional
     
     def __str__(self):
@@ -50,19 +50,19 @@ class Accessories(models.Model):
     name = models.CharField(max_length=100)
     sku = models.CharField(max_length=100, blank=True, null=True)  # optional
     size = models.CharField(max_length=10, blank=True, null=True)  # optional
-    color = models.CharField(max_length=30, blank=True, null=True) # optional
+    color = models.CharField(max_length=30, blank=True, null=True, db_index=True) # optional, index on accessories color
     picture = models.ImageField(upload_to='images/', blank=True, null=True) # optional
 
     def __str__(self):
         return f"{self.brand} {self.name} {self.color}"
 
-# Model for Outfit
 class Outfit(models.Model):
     shirt = models.ForeignKey(Shirt, on_delete=models.CASCADE)
-    jacket = models.ForeignKey(Jacket, on_delete=models.CASCADE, blank=True, null=True)  # Jacket is optional
+    jacket = models.ForeignKey(Jacket, on_delete=models.CASCADE, blank=True, null=True)  # optional
     pants = models.ForeignKey(Pants, on_delete=models.CASCADE)
     shoes = models.ForeignKey(Shoes, on_delete=models.CASCADE)
-    accessories = models.ManyToManyField(Accessories, blank=True)  # Accessories are optional
+    accessories = models.ManyToManyField(Accessories, blank=True)  # optional
 
     def __str__(self):
         return f"Outfit with {self.shirt}, {self.jacket}, {self.pants}, {self.shoes}, Accessories count: {self.accessories.count()}"
+    

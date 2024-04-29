@@ -85,7 +85,7 @@ def delete_shirt(request, pk):
         raise Http404("Shirt not found.")
 
     if request.method == 'POST':
-        # Prepared SQL statement to delete the shirt
+        # Prepared SQL statement
         sql_delete = "DELETE FROM outfits_shirt WHERE id = %s"
         with connection.cursor() as cursor:
             cursor.execute(sql_delete, [pk])
@@ -163,7 +163,7 @@ def delete_jacket(request, pk):
         raise Http404("Jacket not found.")
 
     if request.method == 'POST':
-        # Prepared SQL statement to delete the jacket
+        # Prepared SQL statement
         sql_delete = "DELETE FROM outfits_jacket WHERE id = %s"
         with connection.cursor() as cursor:
             cursor.execute(sql_delete, [pk])
